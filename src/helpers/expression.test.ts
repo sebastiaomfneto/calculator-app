@@ -74,7 +74,6 @@ describe('validateExpression', () => {
 });
 
 describe('calculateExpression', () => {
-  test('should call getOrdenedEntriesByPrecedence and recursiveCalculateEntries', () => {});
   test('should calculate expression', () => {
     const entries = new Map<string, string>([
       ['2+2*2', '6'],
@@ -87,5 +86,11 @@ describe('calculateExpression', () => {
     Array.from(entries.entries()).forEach(([expression, result]) => {
       expect(calculateExpression(expression)).toEqual(result);
     });
+  });
+
+  test('should return ERR on error', () => {
+    const expression = '2+2+';
+
+    expect(calculateExpression(expression)).toEqual('ERR');
   });
 });

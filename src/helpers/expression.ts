@@ -96,9 +96,12 @@ export const validateExpression = (expression: string): void => {
 };
 
 export const calculateExpression = (expression: string): string => {
-  validateExpression(expression);
+  try {
+    validateExpression(expression);
+    const entries: Entry[] = getOrdenedEntriesByPrecedence(expression);
 
-  const entries: Entry[] = getOrdenedEntriesByPrecedence(expression);
-
-  return recursiveCalculateEntries(entries);
+    return recursiveCalculateEntries(entries);
+  } catch {
+    return 'ERR';
+  }
 };
